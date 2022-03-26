@@ -34,18 +34,33 @@ public class TestStudent {
 
         this.service = new Service(fileRepository1, fileRepository2, fileRepository3);
     }
-    // id - valid, null, empty string
-    // nume - valid, null, empty string
-    // grupa - 111, 110, 109
-    // grupa - 939, 938, 937
+
     @Test
     public void TestAddStudent_ValidName_Passes(){
-         Assertions.assertEquals(0, this.service.saveStudent("23", "ValidName", 937));
+         Assertions.assertEquals(0, this.service.saveStudent("11", "ValidName", 111));
     }
-    public void TestAddStudent_EmptyString_Fails(){
-        Assertions.assertEquals(1, this.service.saveStudent("23", "", 937));
+
+    @Test
+    public void TestAddStudent_EmptyName_Fails(){
+        Assertions.assertEquals(1, this.service.saveStudent("12", "", 937));
     }
+
+    @Test
     public void TestAddStudent_Null_Fails(){
-        Assertions.assertEquals(1, this.service.saveStudent("23", null, 937));
+        Assertions.assertEquals(1, this.service.saveStudent("13", null, 937));
     }
-}
+
+    @Test
+    public void TestAddStudent_ID_Passes(){
+        Assertions.assertEquals(0, this.service.saveStudent("11", "ValidName", 111));
+    }
+
+    @Test
+    public void TestAddStudent_EmptyID_Fails(){
+        Assertions.assertEquals(1, this.service.saveStudent("", "ValidName", 937));
+    }
+
+    @Test
+    public void TestAddStudent_NullID_Fails(){
+        Assertions.assertEquals(1, this.service.saveStudent(null, "ValidName", 937));
+    }
