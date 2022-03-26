@@ -23,7 +23,7 @@ public class TestAddStudent {
 
     private Service service;
 
-    void TestStudent() {
+    TestAddStudent() {
         this.studentValidator = new StudentValidator();
         this.temaValidator = new TemaValidator();
         this.notaValidator = new NotaValidator();
@@ -42,28 +42,27 @@ public class TestAddStudent {
     // grupa - 939, 938, 937
 
     @Test
-    public void testAddStudent_ValidGroup110_Passes() {
-        int result = this.service.saveStudent("student1", "George", 110);
-        Assertions.assertEquals(result, 0);
+    public void testAddStudent_InvalidGroup110_DoesntPass() {
+        Assertions.assertEquals(this.service.saveStudent("student1", "George1", 110), 1);
     }
 
     @Test
     public void testAddStudent_ValidGroup111_Passes() {
-        Assertions.assertEquals(this.service.saveStudent("student1", "George", 111), 0);
+        Assertions.assertEquals(this.service.saveStudent("student2", "George2", 111), 0);
     }
 
     @Test
-    public void testAddStudent_ValidGroup109_Passes() {
-        Assertions.assertEquals(this.service.saveStudent("student1", "George", 109), 0);
+    public void testAddStudent_InvalidGroup109_DoesntPass() {
+        Assertions.assertEquals(this.service.saveStudent("student3", "George3", 109), 1);
     }
 
     @Test
-    public void testAddStudent_ValidGroup939_Passes() {
-        Assertions.assertEquals(this.service.saveStudent("student1", "George", 939),0);
+    public void testAddStudent_InvalidGroup939_DoesntPass() {
+        Assertions.assertEquals(this.service.saveStudent("student4", "George4", 939),1);
     }
 
     @Test
     public void testAddStudent_ValidGroup938_Passes() {
-        Assertions.assertEquals(this.service.saveStudent("student1", "George", 938), 0);
+        Assertions.assertEquals(this.service.saveStudent("student5", "George5", 938), 1);
     }
 }
