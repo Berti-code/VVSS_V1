@@ -12,11 +12,11 @@ import validation.TemaValidator;
 import validation.Validator;
 import org.junit.jupiter.api.Assertions;
 
-public class TestAddStudent {
+public class AppTest {
 
     private final Service service;
 
-    TestAddStudent() {
+    AppTest() {
         Validator<Student> studentValidator = new StudentValidator();
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
