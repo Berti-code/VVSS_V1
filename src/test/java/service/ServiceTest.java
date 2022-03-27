@@ -4,7 +4,7 @@ import domain.Nota;
 import domain.Student;
 import domain.Tema;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import repository.NotaXMLRepository;
 import repository.StudentXMLRepository;
 import repository.TemaXMLRepository;
@@ -12,23 +12,18 @@ import validation.NotaValidator;
 import validation.StudentValidator;
 import validation.TemaValidator;
 import validation.Validator;
-import org.junit.jupiter.api.Assertions;
 
 public class ServiceTest {
 
-    private final Service service;
+    Validator<Student> studentValidator = new StudentValidator();
+    Validator<Tema> temaValidator = new TemaValidator();
+    Validator<Nota> notaValidator = new NotaValidator();
 
-    ServiceTest() {
-        Validator<Student> studentValidator = new StudentValidator();
-        Validator<Tema> temaValidator = new TemaValidator();
-        Validator<Nota> notaValidator = new NotaValidator();
+    StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
+    TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
+    NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
 
-        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
-        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
-        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
-
-        service = new Service(fileRepository1, fileRepository2, fileRepository3);
-    }
+    private final Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
 
     @Test
     public void testAddStudent_InvalidGroup110_Fails() {
@@ -62,7 +57,7 @@ public class ServiceTest {
 
     @Test
     public void TestAddStudent_EmptyName_Fails() {
-        Assertions.assertEquals(1, this.service.saveStudent("12", "", 937));
+        Assert.assertEquals(1, this.service.saveStudent("12", "", 937));
     }
 
     @Test
