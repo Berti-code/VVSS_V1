@@ -29,7 +29,7 @@ public class TestAddStudent {
     }
 
     @Test
-    public void testAddStudent_InvalidGroup110_DoesntPass() {
+    public void testAddStudent_InvalidGroup110_Fails() {
         Assertions.assertEquals(1, this.service.saveStudent("student1", "George1", 110));
     }
 
@@ -39,12 +39,12 @@ public class TestAddStudent {
     }
 
     @Test
-    public void testAddStudent_InvalidGroup109_DoesntPass() {
+    public void testAddStudent_InvalidGroup109_Fails() {
         Assertions.assertEquals(1, this.service.saveStudent("student3", "George3", 109));
     }
 
     @Test
-    public void testAddStudent_InvalidGroup939_DoesntPass() {
+    public void testAddStudent_InvalidGroup939_Fails() {
         Assertions.assertEquals(1, this.service.saveStudent("student4", "George4", 939));
     }
 
