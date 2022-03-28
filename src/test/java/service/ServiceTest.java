@@ -14,7 +14,6 @@ import validation.TemaValidator;
 import validation.Validator;
 
 public class ServiceTest {
-
     Validator<Student> studentValidator = new StudentValidator();
     Validator<Tema> temaValidator = new TemaValidator();
     Validator<Nota> notaValidator = new NotaValidator();
