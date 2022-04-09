@@ -8,10 +8,7 @@ import org.junit.Test;
 import repository.NotaXMLRepository;
 import repository.StudentXMLRepository;
 import repository.TemaXMLRepository;
-import validation.NotaValidator;
-import validation.StudentValidator;
-import validation.TemaValidator;
-import validation.Validator;
+import validation.*;
 
 public class ServiceTestAddAssignment{
     Validator<Student> studentValidator = new StudentValidator();
@@ -32,5 +29,15 @@ public class ServiceTestAddAssignment{
     @Test
     public void addAssignment_ExistingId_Failed() {
         Assert.assertEquals(this.service.saveTema("tema1", "tema de lab", 3, 5), 1);
+    }
+
+    @Test
+    public void addAssignment_NullId_Failed() {
+        try {
+            Tema tema = new Tema("", "tema lab", 6, 4);
+            Tema result = fileRepository2.save(tema);
+        } catch(ValidationException e) {
+           Assert.assertEquals(e.toString(), "ID invalid! \n");
+        }
     }
 }
