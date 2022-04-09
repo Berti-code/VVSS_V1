@@ -11,8 +11,6 @@ import repository.StudentXMLRepository;
 import repository.TemaXMLRepository;
 import validation.*;
 
-import java.util.Collections;
-
 public class ServiceTestAddAssignment{
     Validator<Student> studentValidator = new StudentValidator();
     Validator<Tema> temaValidator = new TemaValidator();
@@ -24,14 +22,23 @@ public class ServiceTestAddAssignment{
 
     private final Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
 
+    private void resetRepository() {
+        if(!fileRepository2.findAll().iterator().hasNext())
+            return;
+        for(Tema x: fileRepository2.findAll()) {
+            fileRepository2.delete(x.getID());
+        }
+    }
+
     @Test
     public void addAssignment_UniqueId_Added() {
-        Assert.assertEquals(this.service.saveTema("tema1", "tema de laborator", 4, 7), 1);
+        resetRepository();
+        Assert.assertEquals(0, this.service.saveTema("tema1", "tema de laborator", 7, 4));
     }
 
     @Test
     public void addAssignment_ExistingId_NotAdded() {
-        Assert.assertEquals(this.service.saveTema("tema1", "tema de lab", 3, 5), 1);
+        Assert.assertEquals(1, this.service.saveTema("tema1", "tema de lab", 3, 5));
     }
 
     @Test
@@ -77,7 +84,7 @@ public class ServiceTestAddAssignment{
     public void addAssignment_NullDescription_NotAdded() {
         Iterable<Tema> elems = fileRepository2.findAll();
         try {
-            Tema tema = new Tema("2", null, 6, 4);
+            Tema tema = new Tema("3", null, 6, 4);
             fileRepository2.save(tema);
         } catch(ValidationException e) {
             Assert.fail();
@@ -90,7 +97,7 @@ public class ServiceTestAddAssignment{
     public void addAssignment_InvalidDeadline_NotAdded() {
         Iterable<Tema> elems = fileRepository2.findAll();
         try {
-            Tema tema = new Tema("2", "description", 0, -1);
+            Tema tema = new Tema("4", "description", 0, -1);
             fileRepository2.save(tema);
         } catch(ValidationException e) {
             Assert.fail();
@@ -103,7 +110,7 @@ public class ServiceTestAddAssignment{
     public void addAssignment_InvalidStartline_NotAdded() {
         Iterable<Tema> elems = fileRepository2.findAll();
         try {
-            Tema tema = new Tema("2", "description", 0, 0);
+            Tema tema = new Tema("5", "description", 0, 0);
             fileRepository2.save(tema);
         } catch(ValidationException e) {
             Assert.fail();
@@ -114,9 +121,9 @@ public class ServiceTestAddAssignment{
 
     @Test
     public void addAssignment_ValidEntity_Added() {
-        Tema tema = new Tema("1", "desc", 6, 4);
+        Tema tema = new Tema("6", "desc", 6, 4);
         fileRepository2.save(tema);
-        Tema elem = fileRepository2.findOne("1");
+        Tema elem = fileRepository2.findOne("6");
         Assert.assertEquals(elem.getID(), tema.getID());
     }
 }
