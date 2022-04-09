@@ -35,7 +35,7 @@ public class ServiceTestAddAssignment{
     }
 
     @Test
-    public void addAssignment_NullId_NotAdded() {
+    public void addAssignment_EmptyId_NotAdded() {
         Iterable<Tema> elems = fileRepository2.findAll();
         try {
             Tema tema = new Tema("", "tema lab", 6, 4);
@@ -48,8 +48,73 @@ public class ServiceTestAddAssignment{
     }
 
     @Test
-    public void addAssignment_ValidId_Added() {
-        Tema tema = new Tema("1", "tema lab", 6, 4);
+    public void addAssignment_NullId_NotAdded() {
+        Iterable<Tema> elems = fileRepository2.findAll();
+        try {
+            Tema tema = new Tema(null, "tema lab", 6, 4);
+            fileRepository2.save(tema);
+        } catch(ValidationException e) {
+            Assert.fail();
+        }
+        Iterable<Tema> elemsNew = fileRepository2.findAll();
+        Assert.assertEquals(IterableUtils.size(elems), IterableUtils.size(elemsNew));
+    }
+
+    @Test
+    public void addAssignment_EmptyDescription_NotAdded() {
+        Iterable<Tema> elems = fileRepository2.findAll();
+        try {
+            Tema tema = new Tema("2", "", 6, 4);
+            fileRepository2.save(tema);
+        } catch(ValidationException e) {
+            Assert.fail();
+        }
+        Iterable<Tema> elemsNew = fileRepository2.findAll();
+        Assert.assertEquals(IterableUtils.size(elems), IterableUtils.size(elemsNew));
+    }
+
+    @Test
+    public void addAssignment_NullDescription_NotAdded() {
+        Iterable<Tema> elems = fileRepository2.findAll();
+        try {
+            Tema tema = new Tema("2", null, 6, 4);
+            fileRepository2.save(tema);
+        } catch(ValidationException e) {
+            Assert.fail();
+        }
+        Iterable<Tema> elemsNew = fileRepository2.findAll();
+        Assert.assertEquals(IterableUtils.size(elems), IterableUtils.size(elemsNew));
+    }
+
+    @Test
+    public void addAssignment_InvalidDeadline_NotAdded() {
+        Iterable<Tema> elems = fileRepository2.findAll();
+        try {
+            Tema tema = new Tema("2", "description", 0, -1);
+            fileRepository2.save(tema);
+        } catch(ValidationException e) {
+            Assert.fail();
+        }
+        Iterable<Tema> elemsNew = fileRepository2.findAll();
+        Assert.assertEquals(IterableUtils.size(elems), IterableUtils.size(elemsNew));
+    }
+
+    @Test
+    public void addAssignment_InvalidStartline_NotAdded() {
+        Iterable<Tema> elems = fileRepository2.findAll();
+        try {
+            Tema tema = new Tema("2", "description", 0, 0);
+            fileRepository2.save(tema);
+        } catch(ValidationException e) {
+            Assert.fail();
+        }
+        Iterable<Tema> elemsNew = fileRepository2.findAll();
+        Assert.assertEquals(IterableUtils.size(elems), IterableUtils.size(elemsNew));
+    }
+
+    @Test
+    public void addAssignment_ValidEntity_Added() {
+        Tema tema = new Tema("1", "desc", 6, 4);
         fileRepository2.save(tema);
         Tema elem = fileRepository2.findOne("1");
         Assert.assertEquals(elem.getID(), tema.getID());
