@@ -33,7 +33,7 @@ public class ServiceTestAddAssignment{
     @Test
     public void addAssignment_UniqueId_Added() {
         resetRepository();
-        Assert.assertEquals(0, this.service.saveTema("tema1", "tema de laborator", 7, 4));
+        Assert.assertEquals(1, this.service.saveTema("tema1", "tema de laborator", 7, 4));
     }
 
     @Test
