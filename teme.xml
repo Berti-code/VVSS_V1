@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entitati>
+    <tema ID="6">
+        <Descriere>desc</Descriere>
+        <Deadline>6</Deadline>
+        <Startline>4</Startline>
+    </tema>
+    <tema ID="9">
+        <Descriere>desc</Descriere>
+        <Deadline>6</Deadline>
+        <Startline>4</Startline>
+    </tema>
+    <tema ID="10">
+        <Descriere>desc</Descriere>
+        <Deadline>6</Deadline>
+        <Startline>4</Startline>
+    </tema>
 </Entitati>
