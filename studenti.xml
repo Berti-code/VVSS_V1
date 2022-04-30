@@ -1,15 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entitati>
-    <student ID="12">
-        <Nume>ValidName</Nume>
-        <Grupa>111</Grupa>
-    </student>
-    <student ID="13">
-        <Nume>ValidName</Nume>
-        <Grupa>111</Grupa>
-    </student>
-    <student ID="14">
-        <Nume>ValidName</Nume>
-        <Grupa>111</Grupa>
-    </student>
 </Entitati>
