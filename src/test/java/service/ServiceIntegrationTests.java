@@ -49,15 +49,15 @@ public class ServiceIntegrationTests {
 
     @Test
     public void addStudentAssignmentGradeIntegration() {
-        Student student = new Student("13", "ValidName", 111);
+        Student student = new Student("14", "ValidName", 111);
         fileRepository1.save(student);
 
-        Tema tema = new Tema("10", "desc", 6, 4);
+        Tema tema = new Tema("11", "desc", 6, 4);
         fileRepository2.save(tema);
 
-        Nota nota = new Nota(new Pair("13", "10"), 10, 7, "a fost bine");
+        Nota nota = new Nota(new Pair("14", "11"), 10, 7, "a fost bine");
         fileRepository3.save(nota);
-        Nota notaInRepo = fileRepository3.findOne(new Pair("13", "10"));
+        Nota notaInRepo = fileRepository3.findOne(new Pair("14", "11"));
         Assert.assertEquals(notaInRepo.getID(), nota.getID());
     }
 }
